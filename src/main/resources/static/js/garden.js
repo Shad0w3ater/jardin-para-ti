@@ -12,7 +12,7 @@ const elementosTiempo = {
 };
 
 // Medianoche del 16 de octubre, hora de Guatemala (UTC-6).
-const fechaSorpresa = new Date("2026-10-16T00:00:00-06:00");
+const fechaSorpresa = new Date("2026-10-13T15:24:00-06:00");
 
 function actualizarCuentaRegresiva() {
     const ahora = Date.now();
