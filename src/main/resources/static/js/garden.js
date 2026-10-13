@@ -27,12 +27,20 @@ const elementosTiempo = {
     segundos: document.getElementById("segundos")
 };
 
-// Configura aquí tu fecha u hora de prueba (ej. 2 o 3 minutos en el futuro para probar)
-const fechaSorpresa = new Date("2026-10-13T15:50:00-06:00");
+// Configura aquí tu fecha u hora de prueba
+const fechaSorpresa = new Date("2026-10-13T16:00:00-06:00");
+
+let sobreAbierto = false;
+let temporizadorMensaje;
+const floresDescubiertas = new Set();
+let finalIniciado = false;
 
 /* ========================================
    CUENTA REGRESIVA DEL REGALO
    ======================================== */
+
+// Declaramos primero la variable del temporizador para que exista antes de usarla
+let temporizadorCuenta;
 
 function actualizarCuentaRegresiva() {
     const ahora = Date.now();
@@ -43,7 +51,9 @@ function actualizarCuentaRegresiva() {
         pantallaSobre.hidden = false;
         pantallaSobre.classList.add("activa");
 
-        clearInterval(temporizadorCuenta);
+        if (temporizadorCuenta) {
+            clearInterval(temporizadorCuenta);
+        }
         return;
     }
 
@@ -58,14 +68,9 @@ function actualizarCuentaRegresiva() {
     elementosTiempo.segundos.textContent = String(segundos).padStart(2, "0");
 }
 
-// Comprobar la fecha inmediatamente y después cada segundo.
+// Inicializamos el temporizador y ejecutamos la primera verificación
+temporizadorCuenta = setInterval(actualizarCuentaRegresiva, 1000);
 actualizarCuentaRegresiva();
-const temporizadorCuenta = setInterval(actualizarCuentaRegresiva, 1000);
-
-let sobreAbierto = false;
-let temporizadorMensaje;
-const floresDescubiertas = new Set();
-let finalIniciado = false;
 
 const pensamientos = [
     "Tu sonrisa tiene el poder de iluminar hasta la noche más oscura",
@@ -93,8 +98,6 @@ const reducirMovimiento = window.matchMedia(
 ).matches;
 
 sobre.addEventListener("click", () => {
-    // Si ya está abierto completamente, no hacemos nada extra, 
-    // pero nos aseguramos de que el botón de continuar sea visible por si acaso.
     if (sobre.classList.contains("abierto") && !botonContinuar.classList.contains("oculto")) {
         return;
     }
@@ -159,8 +162,6 @@ function crearFlores() {
             ? "0s"
             : `${indice * 0.18}s`;
 
-        // Cada flor se construye con seis pétalos.
-        
         const tallo = document.createElement("span");
         tallo.className = "tallo";
         flor.appendChild(tallo);
@@ -184,10 +185,8 @@ function crearFlores() {
         flor.appendChild(centro);
          
         flor.addEventListener("click", () => {
-            // Registrar esta flor sin contarla dos veces.
             floresDescubiertas.add(indice);
 
-            // Comprobar si ya descubrió todas las flores.
             if (
                 floresDescubiertas.size === pensamientos.length &&
                 !finalIniciado
@@ -196,20 +195,12 @@ function crearFlores() {
                 mostrarCorazon();
             }
 
-            // Cancelar una transición pendiente
             clearTimeout(temporizadorMensaje);
-
-            // Ocultar el mensaje actual
             mensajeFlor.classList.remove("visible");
 
-            // Esperar a que termine el desvanecimiento
             temporizadorMensaje = setTimeout(() => {
                 mensajeFlor.textContent = pensamiento;
-
-                // Permitir que el navegador aplique el estado oculto
                 void mensajeFlor.offsetWidth;
-
-                // Mostrar el nuevo mensaje
                 mensajeFlor.classList.add("visible");
             }, 250);
         });
@@ -222,8 +213,6 @@ function crearLuciérnagas() {
     if (!campoLuciérnagas) return;
 
     campoLuciérnagas.replaceChildren();
-
-    // Sin movimiento reducido, añadimos pequeños puntos de luz.
     const cantidad = reducirMovimiento ? 0 : 16;
 
     for (let i = 0; i < cantidad; i++) {
@@ -244,15 +233,7 @@ function crearPetalos() {
     if (!campoPetalos) return;
 
     campoPetalos.replaceChildren();
-
-    // Unos pocos pétalos para mantener una atmósfera delicada.
-    const paletaPetalos = [
-        "#efb5d0",
-        "#d6c0f3",
-        "#fff0f5",
-        "#e6c2d9"
-    ];
-
+    const paletaPetalos = ["#efb5d0", "#d6c0f3", "#fff0f5", "#e6c2d9"];
     const cantidad = reducirMovimiento ? 0 : 9;
 
     for (let i = 0; i < cantidad; i++) {
@@ -272,19 +253,14 @@ function crearPetalos() {
     }
 }
 
-
 function crearCorazon() {
     if (!particulasCorazon || !corazonCielo) return;
 
     particulasCorazon.replaceChildren();
-
-    // Creamos los puntos siguiendo una curva matemática de corazón.
     const cantidad = reducirMovimiento ? 25 : 70;
 
     for (let i = 0; i < cantidad; i++) {
         const t = (Math.PI * 2 * i) / cantidad;
-
-        // Ecuación paramétrica de un corazón.
         const x = 16 * Math.pow(Math.sin(t), 3);
         const y =
             13 * Math.cos(t) -
@@ -295,7 +271,6 @@ function crearCorazon() {
         const particula = document.createElement("span");
         particula.className = "particula-corazon";
 
-        // Convertimos las coordenadas a porcentajes.
         const posicionX = 50 + (x / 18) * 45;
         const posicionY = 45 - (y / 17) * 43;
 
@@ -321,14 +296,10 @@ function crearCorazon() {
     }
 }
 
-
 function mostrarCorazon() {
     if (!corazonCielo || !particulasCorazon) return;
 
     crearCorazon();
-
-    // Mostrar el corazón y dejar que el navegador
-    // registre sus dimensiones.
     corazonCielo.classList.add("visible");
 
     requestAnimationFrame(() => {
@@ -340,10 +311,7 @@ function animarLuciernagasHaciaCorazon() {
     if (reducirMovimiento) return;
     if (!campoLuciérnagas || !corazonCielo) return;
 
-    const luces = [
-        ...campoLuciérnagas.querySelectorAll(".luciérnaga")
-    ];
-
+    const luces = [...campoLuciérnagas.querySelectorAll(".luciérnaga")];
     if (luces.length === 0) return;
 
     const area = campoLuciérnagas.getBoundingClientRect();
@@ -351,11 +319,8 @@ function animarLuciernagasHaciaCorazon() {
 
     if (!area.width || !area.height) return;
 
-    // Cada luciérnaga se dirige a un punto distinto
-    // de la curva del corazón.
     luces.forEach((luz, indice) => {
         const t = (Math.PI * 2 * indice) / luces.length;
-
         const x = 16 * Math.pow(Math.sin(t), 3);
         const y =
             13 * Math.cos(t) -
@@ -363,17 +328,11 @@ function animarLuciernagasHaciaCorazon() {
             2 * Math.cos(3 * t) -
             Math.cos(4 * t);
 
-        const destinoX = corazon.left + corazon.width *
-            (0.5 + (x / 18) * 0.45);
+        const destinoX = corazon.left + corazon.width * (0.5 + (x / 18) * 0.45);
+        const destinoY = corazon.top + corazon.height * (0.45 - (y / 17) * 0.43);
 
-        const destinoY = corazon.top + corazon.height *
-            (0.45 - (y / 17) * 0.43);
-
-        const porcentajeX =
-            ((destinoX - area.left) / area.width) * 100;
-
-        const porcentajeY =
-            ((destinoY - area.top) / area.height) * 100;
+        const porcentajeX = ((destinoX - area.left) / area.width) * 100;
+        const porcentajeY = ((destinoY - area.top) / area.height) * 100;
 
         luz.style.setProperty("--x-inicial", luz.style.left);
         luz.style.setProperty("--y-inicial", luz.style.top);
@@ -394,12 +353,10 @@ function animarLuciernagasHaciaCorazon() {
     });
 }
 
-
 botonMusica.addEventListener("click", async () => {
     if (musica.paused) {
         try {
             await musica.play();
-
             botonMusica.textContent = "♫ Pausar música";
             botonMusica.setAttribute("aria-pressed", "true");
         } catch (error) {
@@ -407,7 +364,6 @@ botonMusica.addEventListener("click", async () => {
         }
     } else {
         musica.pause();
-
         botonMusica.textContent = "♫ Reproducir música";
         botonMusica.setAttribute("aria-pressed", "false");
     }
