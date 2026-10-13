@@ -1,9 +1,5 @@
 services:
   - type: web
     name: jardin-para-ti
-    runtime: image
-    image: 
-      url: maven:3.9-eclipse-temurin-17
-    buildCommand: "./mvnw clean package -DskipTests"
-    startCommand: "java -jar target/*.jar"
+    runtime: docker
     plan: free
