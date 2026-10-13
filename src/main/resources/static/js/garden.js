@@ -21,7 +21,8 @@ function actualizarCuentaRegresiva() {
     if (diferencia <= 0) {
         pantallaCuenta.hidden = true;
         pantallaSobre.hidden = false;
-
+        pantallaSobre.classList.add("activa");
+        
         clearInterval(temporizadorCuenta);
         return;
     }
