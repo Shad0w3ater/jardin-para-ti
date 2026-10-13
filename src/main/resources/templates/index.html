@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Un jardín para ti</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/garden.js" defer></script>
+</head>
+
+<body>
+    <div class="stars" aria-hidden="true"></div>
+
+    <main>
+        
+<!-- PANTALLA INICIAL: CUENTA REGRESIVA -->
+<section id="pantalla-cuenta" class="pantalla cuenta-regresiva">
+    <p class="etiqueta">ALGO HERMOSO ESTÁ POR FLORECER</p>
+
+    <h1>El momento se acerca...</h1>
+
+    <p class="instruccion">
+        Cada segundo nos acerca a una sorpresa especial.
+    </p>
+
+    <div class="contador" aria-label="Tiempo restante">
+        <div class="unidad-tiempo">
+            <span id="dias">00</span>
+            <small>DÍAS</small>
+        </div>
+
+        <div class="unidad-tiempo">
+            <span id="horas">00</span>
+            <small>HORAS</small>
+        </div>
+
+        <div class="unidad-tiempo">
+            <span id="minutos">00</span>
+            <small>MINUTOS</small>
+        </div>
+
+        <div class="unidad-tiempo">
+            <span id="segundos">00</span>
+            <small>SEGUNDOS</small>
+        </div>
+    </div>
+
+    <p class="fecha-especial">16 · 10 · 2026</p>
+</section>
+
+        <!-- PRIMERA PANTALLA: EL SOBRE -->
+        <section id="pantalla-sobre" class="pantalla activa" hidden>
+            <p class="etiqueta">UN PEQUEÑO REGALO PARA TI</p>
+
+            <h1>Hay algo que quiero mostrarte...</h1>
+
+            <p class="instruccion">
+                He guardado un pequeño secreto entre estos pliegues.
+            </p>
+
+            <button
+                id="sobre"
+                class="sobre"
+                type="button"
+                aria-label="Abrir el sobre"
+                aria-expanded="false">
+
+                <span class="sobre-sombra"></span>
+                <span class="carta">
+                    <span class="carta-titulo">Para ti</span>
+                    <span class="carta-texto">
+                        Hay lugares que se vuelven especiales
+                        por la persona que los inspira.
+                    </span>
+                </span>
+
+                <span class="sobre-cuerpo"></span>
+                <span class="sobre-solapa"></span>
+                <span class="sello">♥</span>
+            </button>
+
+            <p id="texto-sobre" class="ayuda">
+                Pulsa el sobre para abrirlo
+            </p>
+
+            <button id="continuar" class="boton oculto" type="button">
+                Descubrir la sorpresa
+                <span aria-hidden="true"> →</span>
+            </button>
+        </section>
+
+    <!-- SEGUNDA PANTALLA: EL JARDÍN -->
+    <section id="pantalla-jardin" class="pantalla jardin" hidden>
+    
+    <p class="etiqueta">UN LUGAR HECHO PARA TI</p>
+    <h1>Bienvenida a tu jardín</h1>
+    <p class="subtitulo">Cada flor guarda un pequeño pensamiento.</p>
+
+    <div id="jardin" class="campo-jardin"
+         aria-label="Jardín de flores interactivas"></div>
+
+    <p class="ayuda">Toca una flor y descubre lo que guarda para ti.</p>
+
+    <div class="controles">
+        <button id="boton-musica" class="boton-secundario"
+                type="button" aria-pressed="true">
+            ♫ Pausar música
+        </button>
+    </div>
+
+    <p id="mensaje-flor" class="mensaje-flor" aria-live="polite"></p>
+
+    <!-- LA DECORACIÓN (Y EL CORAZÓN) SE MUEVE AL FINAL -->
+    <div class="decoracion-jardin" aria-hidden="true">
+        <div class="luna"></div>
+        <div class="luciérnagas" id="luciérnagas"></div>
+        <div class="corazon-cielo" id="corazon-cielo">
+            <div class="particulas-corazon" id="particulas-corazon"></div>
+        </div>
+        <div class="petalos-caidos" id="petalos-caidos"></div>
+    </div>
+
+</section>
+    </main>
+
+    <audio id="musica" src="/audio/piano.mp3"
+           loop preload="auto"></audio>
+</body>
+</html>

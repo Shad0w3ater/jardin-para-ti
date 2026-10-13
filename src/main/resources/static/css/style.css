@@ -1,0 +1,1253 @@
+
+:root {
+    --noche: #100b1b;
+    --vino: #68283f;
+    --dorado: #e8c58b;
+    --crema: #f7ead8;
+    --lavanda: #cbb6dc;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--crema);
+    background:
+        radial-gradient(
+            ellipse at 50% 100%,
+            rgba(109, 48, 73, 0.42) 0%,
+            transparent 58%
+        ),
+        radial-gradient(
+            ellipse at 50% 0%,
+            #293747 0%,
+            transparent 65%
+        ),
+        linear-gradient(
+            160deg,
+            #18212d 0%,
+            #1c2430 55%,
+            #20202b 100%
+        );
+    font-family: Georgia, "Times New Roman", serif;
+    overflow-x: hidden;
+}
+
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.45;
+    background-image:
+        radial-gradient(1px 1px at 12% 22%, white 50%, transparent),
+        radial-gradient(2px 2px at 76% 18%, #f6d9a1 50%, transparent),
+        radial-gradient(1px 1px at 88% 62%, white 50%, transparent),
+        radial-gradient(1px 1px at 28% 74%, #d9b8ed 50%, transparent),
+        radial-gradient(2px 2px at 55% 40%, white 50%, transparent);
+    background-size: 250px 220px;
+    animation: estrellas 8s ease-in-out infinite alternate;
+}
+
+@keyframes estrellas {
+    from { opacity: 0.25; }
+    to { opacity: 0.7; }
+}
+
+main {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+}
+
+.pantalla {
+    min-height: 100vh;
+    padding: 45px 20px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    animation: aparecer 1s ease both;
+}
+
+.pantalla.activa {
+    display: flex;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.etiqueta {
+    color: var(--dorado);
+    font-family: Arial, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    line-height: 1.8;
+}
+
+h1 {
+    max-width: 700px;
+    margin: 12px 0;
+    color: var(--dorado);
+    font-weight: normal;
+    font-size: clamp(2rem, 5vw, 3.3rem);
+    line-height: 1.2;
+}
+
+.instruccion,
+.subtitulo {
+    max-width: 480px;
+    color: var(--lavanda);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.ayuda {
+    margin-top: 24px;
+    color: #b8a6c7;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+}
+
+
+/* SOBRE: paleta romántica nocturna */
+
+.sobre {
+    position: relative;
+    width: min(290px, 78vw);
+    height: 190px;
+    margin-top: 48px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    perspective: 800px;
+    filter:
+        drop-shadow(0 18px 24px #0009)
+        drop-shadow(0 0 12px #781f3620);
+    transition: transform 0.3s, filter 0.3s;
+}
+
+.sobre:hover {
+    transform: translateY(-4px);
+    filter:
+        drop-shadow(0 20px 26px #000a)
+        drop-shadow(0 0 15px #d98baa30);
+}
+
+.sobre-sombra {
+    position: absolute;
+    inset: 20px 0 0;
+    border-radius: 5px;
+    background: linear-gradient(
+        145deg,
+        #241019,
+        #100c12 75%
+    );
+}
+
+.sobre-cuerpo {
+    position: absolute;
+    inset: 35px 0 0;
+    z-index: 3;
+    background: linear-gradient(
+        140deg,
+        #8b3049 0%,
+        #651d35 48%,
+        #3a1427 100%
+    );
+    clip-path: polygon(
+        0 0,
+        50% 52%,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+    border-radius: 3px;
+}
+
+.sobre-solapa {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 112px;
+    z-index: 4;
+    transform-origin: top;
+    background: linear-gradient(
+        160deg,
+        #b64f6d 0%,
+        #8a304c 45%,
+        #53182f 100%
+    );
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transition: transform 0.85s ease, z-index 0s 0.4s;
+}
+
+.carta {
+    position: absolute;
+    z-index: 2;
+    left: 8%;
+    right: 8%;
+    top: 18px;
+    height: 145px;
+    padding: 22px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    color: #5c3347;
+    background: linear-gradient(130deg, #fff3dd, #e8d1b4);
+    border-radius: 3px;
+    transition: transform 0.9s ease 0.25s;
+}
+
+.carta-titulo {
+    color: #8a4055;
+    font-size: 1.4rem;
+    font-style: italic;
+}
+
+.carta-texto {
+    font-size: 0.88rem;
+    line-height: 1.4;
+}
+
+.sello {
+    position: absolute;
+    z-index: 5;
+    top: 76px;
+    left: calc(50% - 20px);
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    color: #f5d99f;
+    background: radial-gradient(circle at 30% 25%, #a64b55, #4d142e);
+    border: 1px solid #d5ae70;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.sobre.abierto .sobre-solapa {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.sobre.abierto .carta {
+    transform: translateY(-105px);
+}
+
+.sobre.abierto .sello {
+    opacity: 0;
+    transform: scale(0.4);
+}
+
+.boton,
+.boton-secundario {
+    padding: 14px 24px;
+    color: var(--crema);
+    background: #572b4d;
+    border: 1px solid var(--dorado);
+    border-radius: 40px;
+    font: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.boton {
+    margin-top: 20px;
+    animation: aparecer 0.8s ease both;
+}
+
+.boton:hover,
+.boton-secundario:hover {
+    background: #75405f;
+    transform: translateY(-2px);
+}
+
+.oculto {
+    display: none !important;
+}
+
+/* JARDÍN */
+
+.jardin {
+    position: relative;
+    overflow: hidden;
+}
+
+.campo-jardin {
+    width: min(750px, 100%);
+    min-height: 280px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 35px 10px;
+    margin-top: 18px;
+    border-bottom: 2px solid #8b6b67;
+    border-radius: 0 0 50% 50%;
+    background:
+        radial-gradient(ellipse at bottom, #382342aa, transparent 70%);
+}
+
+.flor {
+    position: relative;
+    width: 82px;
+    height: 110px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    animation: crecer 1s ease both;
+    transform-origin: bottom center;
+    transition: transform 0.3s;
+}
+
+.flor:hover {
+    transform: scale(1.12);
+}
+
+.flor::before {
+    content: "";
+    position: absolute;
+    width: 3px;
+    height: 53px;
+    bottom: 2px;
+    left: calc(50% - 1px);
+    background: linear-gradient(#8bc18a, #37634c);
+    border-radius: 5px;
+}
+
+.flor::after {
+    content: "";
+    position: absolute;
+    bottom: 26px;
+    left: 28px;
+    width: 25px;
+    height: 11px;
+    background: #638b69;
+    border-radius: 100% 0 100% 0;
+    transform: rotate(-22deg);
+}
+
+
+/* Pétalos suaves y ligeramente superpuestos */
+#pantalla-jardin #jardin .petalo {
+    position: absolute;
+    display: block;
+    left: 30px;
+    top: 2px;
+    width: 22px;
+    height: 34px;
+    border-radius: 55% 55% 48% 48%;
+    transform-origin: 50% 78%;
+    background: radial-gradient(
+        ellipse at 35% 25%,
+        #fff2fa 0%,
+        var(--brillo-flor) 22%,
+        var(--color-flor) 72%,
+        #c982a7 100%
+    );
+    box-shadow:
+        inset 0 1px 3px #ffffff80,
+        0 1px 3px #1b102533;
+    z-index: 1;
+}
+
+/* Distribución de los seis pétalos */
+#pantalla-jardin #jardin .petalo:nth-of-type(4) {
+    transform: rotate(0deg);
+}
+
+#pantalla-jardin #jardin .petalo:nth-of-type(5) {
+    transform: rotate(60deg);
+}
+
+#pantalla-jardin #jardin .petalo:nth-of-type(6) {
+    transform: rotate(120deg);
+}
+
+#pantalla-jardin #jardin .petalo:nth-of-type(7) {
+    transform: rotate(180deg);
+}
+
+#pantalla-jardin #jardin .petalo:nth-of-type(8) {
+    transform: rotate(240deg);
+}
+
+#pantalla-jardin #jardin .petalo:nth-of-type(9) {
+    transform: rotate(300deg);
+}
+
+/* Centro dorado delicado */
+#pantalla-jardin #jardin .centro-flor {
+    position: absolute;
+    left: 50%;
+    top: 24px;
+    width: 10px;
+    height: 10px;
+    border: 1px solid #f9e3a1;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    background: radial-gradient(
+        circle at 35% 30%,
+        #fff8d4,
+        #f0ce75 65%,
+        #d5a34c
+    );
+    box-shadow: 0 0 7px #f5d99566;
+    z-index: 2;
+}
+
+/* Tallo más natural */
+#pantalla-jardin #jardin .tallo {
+    background: linear-gradient(
+        90deg,
+        #426d50,
+        #83a873 55%,
+        #456d4c
+    );
+    width: 2px;
+    border-radius: 100%;
+    transform: rotate(-5deg);
+}
+
+/* Hojas ovaladas y suaves */
+#pantalla-jardin #jardin .hoja {
+    width: 19px;
+    height: 9px;
+    border-radius: 100% 0 100% 0;
+    background: linear-gradient(
+        135deg,
+        #b4ce91,
+        #739866 55%,
+        #426d50
+    );
+    box-shadow: inset 0 1px 1px #ffffff40;
+}
+
+
+@keyframes crecer {
+    from { opacity: 0; transform: scale(0.1); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.mensaje-flor {
+    min-height: 55px;
+    max-width: 500px;
+    margin: 10px auto;
+    padding: 0 12px;
+    color: #f0d6bb;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.6;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.mensaje-flor.visible {
+    opacity: 1;
+}
+
+.controles {
+    margin-top: 10px;
+}
+
+.boton-secundario {
+    font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+    .pantalla {
+        padding: 35px 16px;
+    }
+
+    .sobre {
+        transform: scale(0.9);
+        margin-top: 28px;
+    }
+
+    .sobre:hover {
+        transform: scale(0.93);
+    }
+
+    .campo-jardin {
+        gap: 2px;
+    }
+
+    .flor {
+        width: 68px;
+    }
+
+    .petalo {
+        left: 21px;
+    }
+
+    .centro-flor {
+        left: 28px;
+    }
+}
+
+
+/* =========================================
+   JARDÍN ROMÁNTICO: LUNA, FLORES Y LUCES
+   ========================================= */
+
+.jardin {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+/* Mantiene el contenido del jardín por encima
+   de las decoraciones del fondo. */
+
+/* La decoración puede pasar por delante del contenido */
+.jardin > :not(.decoracion-jardin) {
+    position: relative;
+    z-index: 1;
+}
+
+/* Capa decorativa superior, sin bloquear los clics */
+.decoracion-jardin {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* El corazón queda por encima de las letras y las flores */
+.decoracion-jardin .corazon-cielo {
+    z-index: 10;
+}
+
+.decoracion-jardin .luciérnagas {
+    z-index: 11;
+    pointer-events: none;
+}
+
+
+/* Resplandor lunar. */
+.luna {
+    position: absolute;
+    top: 5%;
+    right: 9%;
+    width: clamp(65px, 10vw, 105px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at 35% 35%,
+        #ffffff 0%,
+        #f5f0ff 35%,
+        #d7d9f5 68%,
+        #b7c1e8 100%
+    );
+    box-shadow:
+        0 0 25px rgba(218, 224, 255, 0.30),
+        0 0 70px rgba(183, 193, 255, 0.13);
+    opacity: 0.85;
+    animation: respirar-luna 7s ease-in-out infinite;
+}
+
+@keyframes respirar-luna {
+    0%, 100% {
+        opacity: 0.72;
+        box-shadow:
+            0 0 25px rgba(218, 224, 255, 0.25),
+            0 0 65px rgba(183, 193, 255, 0.10);
+    }
+    50% {
+        opacity: 0.95;
+        box-shadow:
+            0 0 32px rgba(218, 224, 255, 0.40),
+            0 0 85px rgba(183, 193, 255, 0.18);
+    }
+}
+
+/* Pequeñas luciérnagas doradas. */
+.luciérnagas,
+.petalos-caidos {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.luciérnaga {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--tamaño);
+    height: var(--tamaño);
+    border-radius: 50%;    
+    background: #ffe8b0;
+
+    box-shadow:
+    0 0 6px 2px rgba(255, 221, 139, 0.38),
+    0 0 16px 5px rgba(255, 190, 91, 0.18);
+
+    opacity: 0.25;
+    animation: luciernaga-flotar var(--duracion) ease-in-out infinite;
+    animation-delay: var(--retraso);
+}
+
+
+@keyframes luciernaga-flotar {
+    0%, 100% {
+        transform: translate3d(0, 0, 0) scale(0.8);
+        opacity: 0.15;
+    }
+
+    20% {
+        transform: translate3d(5px, -7px, 0) scale(1);
+        opacity: 0.65;
+    }
+
+    38% {
+        transform: translate3d(12px, -15px, 0) scale(1.15);
+        opacity: 0.95;
+    }
+
+    58% {
+        transform: translate3d(8px, -9px, 0) scale(0.9);
+        opacity: 0.4;
+    }
+
+    76% {
+        transform: translate3d(-4px, -19px, 0) scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+
+/* Pétalos que descienden lentamente. */
+.petalo-caido {
+    position: absolute;
+    top: -35px;
+    left: var(--x);
+    width: var(--ancho);
+    height: calc(var(--ancho) * 1.35);
+    border-radius: 80% 15% 70% 30%;
+    background: var(--color-petalo);
+    opacity: 0;
+    transform: rotate(25deg);
+    animation: caer-petalo var(--duracion) linear infinite;
+    animation-delay: var(--retraso);
+    
+    transform-origin: center center;
+    will-change: transform, opacity;
+
+}
+
+@keyframes caer-petalo {
+    0% {
+        transform: translate3d(0, -30px, 0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.65;
+    }
+
+    25% {
+        transform: translate3d(18px, 25vh, 0) rotate(85deg);
+        opacity: 0.7;
+    }
+
+    45% {
+        transform: translate3d(-12px, 48vh, 0) rotate(175deg);
+        opacity: 0.55;
+    }
+
+    65% {
+        transform: translate3d(24px, 70vh, 0) rotate(255deg);
+        opacity: 0.65;
+    }
+
+    82% {
+        transform: translate3d(5px, 88vh, 0) rotate(315deg);
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: translate3d(-18px, 105vh, 0) rotate(400deg);
+        opacity: 0;
+    }
+}
+
+/* Colores delicados para las distintas flores. */
+.flor {
+    --color-flor: #e9b8d5;
+    --brillo-flor: #ffe2f0;
+    transform-origin: 50% 100%;
+    transition:
+        filter 0.35s ease,
+        transform 0.35s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.flor:hover {
+    filter: brightness(1.13)
+            drop-shadow(0 0 9px rgba(240, 197, 255, 0.28));
+}
+
+.flor:focus-visible {
+    outline: 2px solid #f5dba1;
+    outline-offset: 6px;
+    border-radius: 12px;
+}
+
+
+/* El mensaje aparece con suavidad. */
+.mensaje-flor {
+    text-shadow: 0 0 18px rgba(224, 199, 255, 0.15);
+}
+
+/* Respeta a quienes prefieren menos movimiento. */
+@media (prefers-reduced-motion: reduce) {
+    .luna,
+    .luciérnaga,
+    .petalo-caido,
+    .flor:nth-child(n) {
+        animation: none !important;
+    }
+
+    .flor {
+        transition: none;
+    }
+}
+
+/* Distribución del jardín */
+#pantalla-jardin {
+    position: relative;
+    isolation: isolate;
+}
+
+/* El contenedor decorativo debe estar por encima de todo el contenido */
+#pantalla-jardin .decoracion-jardin {
+    position: absolute !important;
+    inset: 0;
+    z-index: 100 !important;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* El corazón en el cielo con prioridad absoluta */
+#pantalla-jardin .decoracion-jardin .corazon-cielo {
+    position: absolute;
+    z-index: 102 !important;
+}
+
+/* Las letras, flores y elementos interactivos se quedan en una capa inferior */
+#pantalla-jardin > :not(.decoracion-jardin) {
+    position: relative;
+    z-index: 1 !important;
+}
+
+
+
+#pantalla-jardin #jardin.campo-jardin {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 95px));
+    justify-content: center !important;
+    justify-items: center;
+    align-items: end;
+    gap: 30px 24px;
+    width: 100%;
+    max-width: 540px;
+    margin: 35px auto !important;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#pantalla-jardin #jardin .flor {
+    justify-self: center;
+    align-self: end;
+    margin: 0;
+}
+
+/* La cuarta flor de la segunda fila
+   deja su espacio vacío para centrar las tres. */
+#pantalla-jardin #jardin .flor:nth-child(5) {
+    grid-column: 1;
+}
+
+@media (max-width: 480px) {
+    #pantalla-jardin #jardin.campo-jardin {
+        grid-template-columns: repeat(3, minmax(0, 85px));
+        gap: 24px 14px;
+    }
+
+    #pantalla-jardin #jardin .flor:nth-child(5) {
+        grid-column: auto;
+    }
+}
+
+
+
+/* Luna visible */
+#pantalla-jardin .luna {
+    display: block !important;
+    position: absolute;
+    top: 35px;
+    right: 8%;
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at 35% 35%,
+        #ffffff 0%,
+        #f5f0ff 40%,
+        #d7d9f5 75%,
+        #b7c1e8 100%
+    );
+    box-shadow:
+        0 0 25px rgba(218, 224, 255, 0.45),
+        0 0 70px rgba(183, 193, 255, 0.25);
+    opacity: 0.95;
+}
+
+@media (max-width: 480px) {
+    #pantalla-jardin #jardin.campo-jardin {
+        grid-template-columns: repeat(3, minmax(55px, 85px));
+        gap: 24px 14px;
+    }
+
+    #pantalla-jardin .luna {
+        width: 58px;
+        height: 58px;
+        top: 20px;
+        right: 7%;
+    }
+}
+
+
+@media (min-width: 481px) {
+    #pantalla-jardin #jardin .flor:nth-child(5) {
+        grid-column: 1;
+        margin-left: 50%;
+    }
+}
+
+#pantalla-jardin #jardin .flor:hover {
+    transform: translateY(-3px) scale(1.04);
+}
+
+#pantalla-jardin #jardin .flor:focus-visible {
+    outline: 2px solid #f5d7ed;
+    outline-offset: 5px;
+    border-radius: 12px;
+}
+
+/* Distribución centrada de las siete flores */
+#pantalla-jardin #jardin.campo-jardin {
+    display: grid !important;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    align-items: end;
+    justify-items: center;
+    gap: 20px 0;
+    width: 100%;
+    max-width: 430px;
+    margin: 35px auto !important;
+    padding: 8px 0;
+    box-sizing: border-box;
+}
+
+#pantalla-jardin #jardin .flor {
+    grid-column: span 2;
+    justify-self: center;
+    margin: 0 !important;
+}
+
+#pantalla-jardin #jardin .flor:nth-child(5) {
+    grid-column: 2 / span 2;
+}
+
+#pantalla-jardin #jardin .flor:nth-child(6) {
+    grid-column: 4 / span 2;
+}
+
+#pantalla-jardin #jardin .flor:nth-child(7) {
+    grid-column: 6 / span 2;
+}
+
+/* En teléfonos mantenemos cuatro flores arriba y tres abajo */
+@media (max-width: 480px) {
+    #pantalla-jardin #jardin.campo-jardin {
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+        gap: 18px 0;
+        max-width: 340px;
+    }
+
+    #pantalla-jardin #jardin .flor {
+        grid-column: span 2;
+        margin: 0 !important;
+        transform-origin: center bottom;
+    }
+
+    #pantalla-jardin #jardin .flor:nth-child(5) {
+        grid-column: 2 / span 2;
+    }
+
+    #pantalla-jardin #jardin .flor:nth-child(6) {
+        grid-column: 4 / span 2;
+    }
+
+    #pantalla-jardin #jardin .flor:nth-child(7) {
+        grid-column: 6 / span 2;
+    }
+}
+
+/* Brisa nocturna: movimiento suave de las flores */
+@keyframes balanceo-flor {
+    0%, 100% {
+        rotate: -2deg;
+    }
+
+    50% {
+        rotate: 2.5deg;
+    }
+}
+
+/* Cada flor se mueve con un ritmo diferente */
+#pantalla-jardin #jardin .flor {
+    animation: balanceo-flor 4.5s ease-in-out infinite;
+    transform-origin: 50% 100%;
+    will-change: rotate;
+}
+
+#pantalla-jardin #jardin .flor:nth-child(2) {
+    animation-duration: 5.2s;
+    animation-delay: -1.4s;
+}
+
+#pantalla-jardin #jardin .flor:nth-child(3) {
+    animation-duration: 4.8s;
+    animation-delay: -2.2s;
+}
+
+#pantalla-jardin #jardin .flor:nth-child(4) {
+    animation-duration: 5.5s;
+    animation-delay: -0.8s;
+}
+
+#pantalla-jardin #jardin .flor:nth-child(5) {
+    animation-duration: 4.7s;
+    animation-delay: -1.8s;
+}
+
+#pantalla-jardin #jardin .flor:nth-child(6) {
+    animation-duration: 5.4s;
+    animation-delay: -2.6s;
+}
+
+#pantalla-jardin #jardin .flor:nth-child(7) {
+    animation-duration: 4.9s;
+    animation-delay: -1.1s;
+}
+
+/* El movimiento se detiene al pasar el cursor */
+#pantalla-jardin #jardin .flor:hover {
+    animation-play-state: paused;
+}
+
+/* Respetar la preferencia de reducir animaciones */
+@media (prefers-reduced-motion: reduce) {
+    #pantalla-jardin #jardin .flor {
+        animation: none;
+        will-change: auto;
+    }
+}
+
+
+/* Aparición delicada de los mensajes */
+#pantalla-jardin .mensaje-flor {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(3px);
+    transition:
+        opacity 700ms ease,
+        transform 700ms ease,
+        filter 700ms ease;
+    will-change: opacity, transform, filter;
+}
+
+/* El mensaje aparece suavemente */
+#pantalla-jardin .mensaje-flor.visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+/* Respetar las preferencias de movimiento */
+@media (prefers-reduced-motion: reduce) {
+    #pantalla-jardin .mensaje-flor {
+        transition: none;
+        filter: none;
+    }
+}
+
+
+/* Latido suave del sobre */
+@keyframes latido-sobre {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.055);
+    }
+}
+
+/* El sobre respira lentamente */
+.sobre {
+    animation: latido-sobre 3s ease-in-out infinite;
+    transform-origin: center;
+}
+
+/* Al tocarlo o pasar el cursor, se detiene el latido */
+.sobre:hover,
+.sobre:active {
+    animation-play-state: paused;
+}
+
+/* Respetar la preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    .sobre {
+        animation: none;
+    }
+}
+
+
+/* ========================================
+   CORAZÓN DE LUCES EN EL CIELO
+   ======================================== */
+
+.corazon-cielo {
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    width: min(72vw, 340px);
+    aspect-ratio: 1 / 0.9;
+    transform: translateX(-50%);
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity 1.8s ease,
+        visibility 1.8s ease;
+}
+
+.corazon-cielo.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.particulas-corazon {
+    position: absolute;
+    inset: 0;
+}
+
+/* Cada punto de luz que dibujará el corazón */
+.particula-corazon {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--tamano);
+    height: var(--tamano);
+    border-radius: 50%;
+    background: #ffe7a3;
+    opacity: 0;
+    transform: scale(0.2);
+    box-shadow:
+        0 0 5px 2px rgba(255, 225, 151, 0.7),
+        0 0 13px 4px rgba(255, 190, 91, 0.35);
+    transition:
+        opacity 0.8s ease,
+        transform 1s ease;
+    transition-delay: var(--retraso);
+}
+
+.corazon-cielo.visible .particula-corazon {
+    opacity: var(--opacidad, 0.9);
+    transform: scale(1);
+}
+
+/* Algunas estrellas brillan más que otras */
+.particula-corazon.destello {
+    background: #fff8df;
+    box-shadow:
+        0 0 7px 3px rgba(255, 245, 210, 0.9),
+        0 0 18px 6px rgba(255, 206, 112, 0.45);
+}
+
+@media (max-width: 480px) {
+    .corazon-cielo {
+        top: 13%;
+        width: min(76vw, 280px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .corazon-cielo,
+    .particula-corazon {
+        transition: none;
+    }
+}
+
+/* El corazón queda por encima de las flores y la decoración. */
+
+/* Capas del jardín */
+#pantalla-jardin {
+    position: relative;
+    isolation: isolate;
+}
+
+#pantalla-jardin .decoracion-jardin {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+#pantalla-jardin .corazon-cielo {
+    z-index: 30;
+}
+
+#pantalla-jardin .luciérnagas {
+    z-index: 31;
+    pointer-events: none;
+}
+
+#pantalla-jardin #jardin,
+#pantalla-jardin .etiqueta,
+#pantalla-jardin h1,
+#pantalla-jardin .subtitulo,
+#pantalla-jardin .ayuda,
+#pantalla-jardin .controles,
+#pantalla-jardin .mensaje-flor {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* =========================================
+   CORRECCIÓN DEFINITIVA DE CAPAS
+   ========================================= */
+
+#pantalla-jardin {
+    position: relative;
+    /* Eliminamos el isolation: isolate para que no cree una barrera estanca */
+    overflow: visible !important;
+}
+
+/* El contenido normal del jardín */
+#pantalla-jardin > :not(.decoracion-jardin) {
+    position: relative;
+    z-index: 1;
+}
+
+/* La decoración y el corazón se posicionan por encima de todo de manera absoluta a la pantalla */
+#pantalla-jardin .decoracion-jardin {
+    position: absolute;
+    inset: 0;
+    z-index: 9999 !important;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+#pantalla-jardin .decoracion-jardin .corazon-cielo {
+    position: absolute;
+    z-index: 10000 !important;
+}
+
+/* ========================================
+   CUENTA REGRESIVA
+   ======================================== */
+
+.cuenta-regresiva {
+    width: min(92%, 650px);
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 85vh;
+    padding: 30px 12px;
+}
+
+.cuenta-regresiva h1 {
+    margin-bottom: 14px;
+}
+
+.cuenta-regresiva .instruccion {
+    max-width: 420px;
+    line-height: 1.7;
+}
+
+.contador {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(7px, 2vw, 16px);
+    width: 100%;
+    margin: 32px 0 22px;
+}
+
+.unidad-tiempo {
+    padding: 20px 5px;
+    border: 1px solid rgba(232, 197, 139, 0.3);
+    border-radius: 14px;
+    background: rgba(24, 22, 39, 0.45);
+    box-shadow: 0 0 22px rgba(190, 151, 213, 0.08);
+    backdrop-filter: blur(5px);
+}
+
+.unidad-tiempo span {
+    display: block;
+    color: #e8c58b;
+    font-size: clamp(1.7rem, 6vw, 3rem);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.2;
+}
+
+.unidad-tiempo small {
+    display: block;
+    margin-top: 9px;
+    color: #d8c7e5;
+    font-size: clamp(0.55rem, 2vw, 0.75rem);
+    letter-spacing: 0.08em;
+}
+
+.fecha-especial {
+    color: #e8c58b;
+    letter-spacing: 0.28em;
+    font-size: 0.9rem;
+    margin-top: 8px;
+}
+
+@media (max-width: 380px) {
+    .unidad-tiempo {
+        padding: 16px 2px;
+    }
+
+    .unidad-tiempo small {
+        letter-spacing: 0.02em;
+    }
+}
