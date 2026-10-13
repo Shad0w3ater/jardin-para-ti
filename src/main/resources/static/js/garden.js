@@ -1,9 +1,25 @@
-
 /* ========================================
-   CUENTA REGRESIVA DEL REGALO
+   DECLARACIÓN DE ELEMENTOS Y CONFIGURACIÓN
    ======================================== */
 
 const pantallaCuenta = document.getElementById("pantalla-cuenta");
+const pantallaSobre = document.getElementById("pantalla-sobre");
+const pantallaJardin = document.getElementById("pantalla-jardin");
+const campoJardin = document.getElementById("jardin");
+
+const sobre = document.getElementById("sobre");
+const textoSobre = document.getElementById("texto-sobre");
+const botonContinuar = document.getElementById("continuar");
+
+const musica = document.getElementById("musica");
+const botonMusica = document.getElementById("boton-musica");
+const mensajeFlor = document.getElementById("mensaje-flor");
+
+const campoLuciérnagas = document.getElementById("luciérnagas");
+const campoPetalos = document.getElementById("petalos-caidos");
+const corazonCielo = document.getElementById("corazon-cielo");
+const particulasCorazon = document.getElementById("particulas-corazon");
+
 const elementosTiempo = {
     dias: document.getElementById("dias"),
     horas: document.getElementById("horas"),
@@ -11,8 +27,12 @@ const elementosTiempo = {
     segundos: document.getElementById("segundos")
 };
 
-// Medianoche del 16 de octubre, hora de Guatemala (UTC-6).
-const fechaSorpresa = new Date("2026-10-13T15:32:00-06:00");
+// Configura aquí tu fecha u hora de prueba (ej. 2 o 3 minutos en el futuro para probar)
+const fechaSorpresa = new Date("2026-10-13T15:50:00-06:00");
+
+/* ========================================
+   CUENTA REGRESIVA DEL REGALO
+   ======================================== */
 
 function actualizarCuentaRegresiva() {
     const ahora = Date.now();
@@ -41,23 +61,6 @@ function actualizarCuentaRegresiva() {
 // Comprobar la fecha inmediatamente y después cada segundo.
 actualizarCuentaRegresiva();
 const temporizadorCuenta = setInterval(actualizarCuentaRegresiva, 1000);
-
-const sobre = document.getElementById("sobre");
-const textoSobre = document.getElementById("texto-sobre");
-const botonContinuar = document.getElementById("continuar");
-
-const pantallaSobre = document.getElementById("pantalla-sobre");
-const pantallaJardin = document.getElementById("pantalla-jardin");
-const campoJardin = document.getElementById("jardin");
-
-const musica = document.getElementById("musica");
-const botonMusica = document.getElementById("boton-musica");
-const mensajeFlor = document.getElementById("mensaje-flor");
-
-const campoLuciérnagas = document.getElementById("luciérnagas");
-const campoPetalos = document.getElementById("petalos-caidos");
-const corazonCielo = document.getElementById("corazon-cielo");
-const particulasCorazon = document.getElementById("particulas-corazon");
 
 let sobreAbierto = false;
 let temporizadorMensaje;
@@ -154,61 +157,58 @@ function crearFlores() {
 
         // Cada flor se construye con seis pétalos.
         
-const tallo = document.createElement("span");
-tallo.className = "tallo";
-flor.appendChild(tallo);
+        const tallo = document.createElement("span");
+        tallo.className = "tallo";
+        flor.appendChild(tallo);
 
-const hojaIzquierda = document.createElement("span");
-hojaIzquierda.className = "hoja hoja-izquierda";
-flor.appendChild(hojaIzquierda);
+        const hojaIzquierda = document.createElement("span");
+        hojaIzquierda.className = "hoja hoja-izquierda";
+        flor.appendChild(hojaIzquierda);
 
-const hojaDerecha = document.createElement("span");
-hojaDerecha.className = "hoja hoja-derecha";
-flor.appendChild(hojaDerecha);
+        const hojaDerecha = document.createElement("span");
+        hojaDerecha.className = "hoja hoja-derecha";
+        flor.appendChild(hojaDerecha);
 
-for (let i = 0; i < 6; i++) {
-    const petalo = document.createElement("span");
-    petalo.className = "petalo";
-    flor.appendChild(petalo);
-}
+        for (let i = 0; i < 6; i++) {
+            const petalo = document.createElement("span");
+            petalo.className = "petalo";
+            flor.appendChild(petalo);
+        }
 
-const centro = document.createElement("span");
-centro.className = "centro-flor";
-flor.appendChild(centro);
- 
+        const centro = document.createElement("span");
+        centro.className = "centro-flor";
+        flor.appendChild(centro);
+         
+        flor.addEventListener("click", () => {
+            // Registrar esta flor sin contarla dos veces.
+            floresDescubiertas.add(indice);
 
-flor.addEventListener("click", () => {
-    // Registrar esta flor sin contarla dos veces.
-    floresDescubiertas.add(indice);
+            // Comprobar si ya descubrió todas las flores.
+            if (
+                floresDescubiertas.size === pensamientos.length &&
+                !finalIniciado
+            ) {
+                finalIniciado = true;
+                mostrarCorazon();
+            }
 
-    // Comprobar si ya descubrió todas las flores.
-    if (
-        floresDescubiertas.size === pensamientos.length &&
-        !finalIniciado
-    ) {
-        finalIniciado = true;
-        mostrarCorazon();
-    }
+            // Cancelar una transición pendiente
+            clearTimeout(temporizadorMensaje);
 
-    // Cancelar una transición pendiente
-    clearTimeout(temporizadorMensaje);
+            // Ocultar el mensaje actual
+            mensajeFlor.classList.remove("visible");
 
-    // Ocultar el mensaje actual
-    mensajeFlor.classList.remove("visible");
+            // Esperar a que termine el desvanecimiento
+            temporizadorMensaje = setTimeout(() => {
+                mensajeFlor.textContent = pensamiento;
 
-    // Esperar a que termine el desvanecimiento
-    temporizadorMensaje = setTimeout(() => {
-        mensajeFlor.textContent = pensamiento;
+                // Permitir que el navegador aplique el estado oculto
+                void mensajeFlor.offsetWidth;
 
-        // Permitir que el navegador aplique el estado oculto
-        void mensajeFlor.offsetWidth;
-
-        // Mostrar el nuevo mensaje
-        mensajeFlor.classList.add("visible");
-    }, 250);
-});
-
-
+                // Mostrar el nuevo mensaje
+                mensajeFlor.classList.add("visible");
+            }, 250);
+        });
 
         campoJardin.appendChild(flor);
     });
