@@ -93,7 +93,11 @@ const reducirMovimiento = window.matchMedia(
 ).matches;
 
 sobre.addEventListener("click", () => {
-    if (sobreAbierto) return;
+    // Si ya está abierto completamente, no hacemos nada extra, 
+    // pero nos aseguramos de que el botón de continuar sea visible por si acaso.
+    if (sobre.classList.contains("abierto") && !botonContinuar.classList.contains("oculto")) {
+        return;
+    }
 
     sobreAbierto = true;
     sobre.classList.add("abierto");
