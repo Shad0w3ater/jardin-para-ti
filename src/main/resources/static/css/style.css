@@ -1039,7 +1039,7 @@ h1 {
 
 .corazon-cielo {
     position: absolute;
-    top: 12%;
+    top: 28%; /* <-- Aumentamos esto para que el corazón baje y quede sobre las flores */
     left: 50%;
     width: min(72vw, 340px);
     aspect-ratio: 1 / 0.9;
@@ -1098,7 +1098,7 @@ h1 {
 
 @media (max-width: 480px) {
     .corazon-cielo {
-        top: 13%;
+        top: 26%; /* <-- Ajuste para que en celulares baje a la altura de las flores */
         width: min(76vw, 280px);
     }
 }
