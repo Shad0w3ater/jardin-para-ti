@@ -64,13 +64,13 @@ const floresDescubiertas = new Set();
 let finalIniciado = false;
 
 const pensamientos = [
-    "Hay sonrisas que pueden iluminar hasta la noche más oscura.",
-    "Algunas personas hacen que el mundo parezca un lugar más bonito.",
-    "Si cada pensamiento bonito fuera una flor, este jardín no tendría fin.",
-    "Ojalá hoy encuentres tantas razones para sonreír como estrellas hay en el cielo.",
-    "Hay bellezas que no necesitan hacer ruido para ser inolvidables.",
-    "Que este nuevo año de tu vida esté lleno de pequeños momentos mágicos.",
-    "Esta flor es un recordatorio de que alguien desea verte feliz."
+    "Tu sonrisa tiene el poder de iluminar hasta la noche más oscura",
+    "Tú haces que el mundo sea un lugar infinitamente más bonito",
+    "Si cada pensamiento en ti fuera una flor, este jardín no tendría fin.",
+    "Ojalá hoy encuentres tantas razones para sonreír como estrellas hay en el cielo",
+    "Hay bellezas que no necesitan hacer ruido para ser inolvidables",
+    "Que este nuevo año de tu vida esté lleno de pequeños momentos mágicos",
+    "Esta flor es un recordatorio de que alguien desea verte feliz"
 ];
 
 // Rosas, lilas y flores blancas.
@@ -100,7 +100,7 @@ sobre.addEventListener("click", () => {
 
     setTimeout(() => {
         botonContinuar.classList.remove("oculto");
-        textoSobre.textContent = "Hay algo más esperándote.";
+        textoSobre.textContent = "Hay algo más esperándote";
     }, 950);
 });
 
