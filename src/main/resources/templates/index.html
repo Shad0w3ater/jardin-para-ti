@@ -91,12 +91,22 @@
             </button>
         </section>
 
-    <!-- SEGUNDA PANTALLA: EL JARDÍN -->
+<!-- SEGUNDA PANTALLA: EL JARDÍN -->
     <section id="pantalla-jardin" class="pantalla jardin" hidden>
     
     <p class="etiqueta">UN LUGAR HECHO PARA TI</p>
     <h1>Bienvenida a tu jardín</h1>
     <p class="subtitulo">Cada flor guarda un pequeño pensamiento</p>
+
+    <!-- LA DECORACIÓN (Y EL CORAZÓN) AQUÍ ARRIBA -->
+    <div class="decoracion-jardin" aria-hidden="true">
+        <div class="luna"></div>
+        <div class="luciérnagas" id="luciérnagas"></div>
+        <div class="corazon-cielo" id="corazon-cielo">
+            <div class="particulas-corazon" id="particulas-corazon"></div>
+        </div>
+        <div class="petalos-caidos" id="petalos-caidos"></div>
+    </div>
 
     <div id="jardin" class="campo-jardin"
          aria-label="Jardín de flores interactivas"></div>
@@ -111,16 +121,6 @@
     </div>
 
     <p id="mensaje-flor" class="mensaje-flor" aria-live="polite"></p>
-
-    <!-- LA DECORACIÓN (Y EL CORAZÓN) SE MUEVE AL FINAL -->
-    <div class="decoracion-jardin" aria-hidden="true">
-        <div class="luna"></div>
-        <div class="luciérnagas" id="luciérnagas"></div>
-        <div class="corazon-cielo" id="corazon-cielo">
-            <div class="particulas-corazon" id="particulas-corazon"></div>
-        </div>
-        <div class="petalos-caidos" id="petalos-caidos"></div>
-    </div>
 
 </section>
     </main>
