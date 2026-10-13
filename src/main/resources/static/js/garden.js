@@ -28,7 +28,7 @@ const elementosTiempo = {
 };
 
 // Configura aquí tu fecha u hora de prueba
-const fechaSorpresa = new Date("2026-10-13T16:00:00-06:00");
+const fechaSorpresa = new Date("2026-10-16T00:00:00-06:00");
 
 let sobreAbierto = false;
 let temporizadorMensaje;
